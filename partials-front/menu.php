@@ -36,6 +36,7 @@ include('partials-front/login_check.php');
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
     <link rel="stylesheet" type="text/css" href="assets/vendor/daterangepicker/daterangepicker.css" />
+ 
 
 
 </head>

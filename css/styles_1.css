@@ -55,6 +55,12 @@ body {
   font-size: 10pt;
 }
 
+.NG {
+
+  background-color: rgb(236, 17, 17);
+
+}
+
 .scrollableTable th {
   padding: 0px;
   padding-left: 4px;
