@@ -4,15 +4,16 @@ include('partials-front/login_check.php');
 
 
 //if (isset($_SESSION['OperatorName'])) {
-    $OperatorName = $_SESSION['OperatorName'];
+$OperatorName = $_SESSION['OperatorName'];
 //} else {
 //    $OperatorName = "error";
 //}
 
 //if (isset($_SESSION['Class'])) {
- //   $Class_op = $_SESSION['Class'];
+//   $Class_op = $_SESSION['Class'];
 //} else {
-    $Class_op = "Admin";
+$Class_op = "Admin";
+$dir_path = "code/";
 //}
 
 ?>
@@ -36,7 +37,6 @@ include('partials-front/login_check.php');
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
     <link rel="stylesheet" type="text/css" href="assets/vendor/daterangepicker/daterangepicker.css" />
- 
 
 
 </head>
@@ -51,12 +51,16 @@ include('partials-front/login_check.php');
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.php">eDHR (demo)</a>
+                <a style="color:#6495ED;font-size:30px ;margin-left: 20px;font-weight: bold;" href="index.php">Novum IQ eDHR</a>
+                <br>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
+
                         <li class="nav-item">
 
 
@@ -64,6 +68,11 @@ include('partials-front/login_check.php');
                                 <form action="<?php echo SITEURL; ?>search.php" method="POST">
                                     <input class="form-control" type="text" name="search" placeholder="Search..">
                                 </form>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div >
+                                <p style="margin-top: 20px; margin-left: 10px;margin-right: 10px;">Version 1.0</p>
                             </div>
                         </li>
                         <li class="nav-item dropdown notification">
@@ -162,6 +171,7 @@ include('partials-front/login_check.php');
                                 <a class="dropdown-item" href="<?php echo 'logout.php'; ?>"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
+
                     </ul>
                 </div>
             </nav>
@@ -242,7 +252,14 @@ include('partials-front/login_check.php');
                                 <a class="nav-link" href="#"><i class="fa fa-check-square"></i>Receiving</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa fa-arrow-circle-down"></i>Incoming</a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-income" aria-controls="submenu-income"><i class="fas fa-seedling"></i>Incoming Inspection</a>
+                                <div id="submenu-income" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="qc_nspection.php">qc_inspection</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
 
                             <li class="nav-item">
@@ -283,50 +300,40 @@ include('partials-front/login_check.php');
                                 <a class="nav-link" href="#"><i class="fa fa-arrow-circle-down"></i>Seal and container</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="	fas fa-chess-rook"></i>QC</a>
-                                <div id="submenu-4" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="qc_nspection.php">qc_inspection</a>
-                                        </li>
-                                       
-                                    </ul>
-                                </div>
-                            </li>
-                            
+
+
 
 
 
                             <?php
-                            echo $Class_op;
-                        // if ($Class_op == "Admin" or  $Class_op == "Supervisor") {
+                            echo "Database";
+                            // if ($Class_op == "Admin" or  $Class_op == "Supervisor") {
 
 
 
-                                $link = mysqli_connect('128.100.117.98', 'namiki', 'namiki');
-                                $res = mysqli_query($link, "SHOW DATABASES");
-                                echo '<li class="nav-item">
+                            $link = mysqli_connect('128.100.117.98', 'namiki', 'namiki');
+                            $res = mysqli_query($link, "SHOW DATABASES");
+                            echo '<li class="nav-item">
                                     <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="	fas fa-chess-rook"></i>Database</a>
                                     <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">';
-                                while ($row = mysqli_fetch_array($res)) {
-                                    //echo $row['Database'] . "\n";
+                            while ($row = mysqli_fetch_array($res)) {
+                                //echo $row['Database'] . "\n";
 
-                                    $process_str1 = "/npt/i";
+                                $process_str1 = "/npt/i";
 
-                                    if ($row['Database'] !== "npt-lvp") {
+                                if ($row['Database'] !== "npt-lvp") {
 
-                                        if (preg_match($process_str1, $row['Database'])) {
+                                    if (preg_match($process_str1, $row['Database'])) {
 
-                                            echo '<li class="nav-item">';
-                                            echo '<a class="nav-link" href="database.php?db=' . $row['Database'] . '" ><i class="fa fa-arrow-circle-down"></i>' . $row['Database'] . '</a>';
-                                            echo '</li>';
-                                        }
+                                        echo '<li class="nav-item">';
+                                        echo '<a class="nav-link" href="database.php?db=' . $row['Database'] . '" ><i class="fa fa-arrow-circle-down"></i>' . $row['Database'] . '</a>';
+                                        echo '</li>';
                                     }
                                 }
-                                echo '</ul>';
-                                echo '</li>';
+                            }
+                            echo '</ul>';
+                            echo '</li>';
                             //}
 
 
@@ -390,7 +397,7 @@ include('partials-front/login_check.php');
                                 </div>
                             </li>
                          -->
-                            <li class="nav-item">
+                            <li class="nav-item" hidden>
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-table"></i>eDHR parameter LVP</a>
                                 <div id="submenu-6" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
@@ -412,15 +419,15 @@ include('partials-front/login_check.php');
                                     </ul>
                                 </div>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" hidden>
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fas fa-fw fa-table"></i>eDHR parameter SYR</a>
                                 <div id="submenu-7" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link" href="process_list.php?db=npt-baxter-syr">process list</a>
                                         </li>
-                                       
-                                     
+
+
                                         <li class="nav-item">
                                             <a class="nav-link" href="process_value.php?db=npt-baxter-syr">process value</a>
                                         </li>

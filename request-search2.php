@@ -13,8 +13,8 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
     <link rel="stylesheet" href="css/terk.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet" href="css/terk2.css">
-    
+
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -55,8 +55,8 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
             if (preg_match($match_text, $search)) {
                 $database_project = "npt-baxter-lvp";
                 $commant = new DB_con();
-                
-                $result_all = $commant->get_product_assy($database_project,$search);
+
+                $result_all = $commant->get_product_assy($database_project, $search);
                 $count = mysqli_num_rows($result_all);
                 if ($count == 1) {
                     $row = mysqli_fetch_assoc($result_all);
@@ -94,8 +94,8 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
             $_SESSION['model'] = "model3";
             $process_str1 = "/process/i";
             $process_str2 = "/inspection/i";
-            
-            
+
+
             $sql_all = $commant->process_check($database_project);
             $count = mysqli_num_rows($sql_all);
 
@@ -160,12 +160,11 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
 
                                             $DC_check = $data['station_daily_check_id'];
                                             $total_result = $data['total_result'];
-                                            if($total_result == "NG")
-                                            {
+                                            if ($total_result == "NG") {
                                                 $class_tag = 'class = "NG"';
                                             }
-                                            
-                                            echo '<li class = "NG" ><a href=' . SITEURL . 'Sub_process.php?database=' . $process_name . '&PD=' . $data['production_order_no'] . '&lot=' . $data['lot_no'] . '&main=' . $process_name . '&search=' . $search . '&Station=' . $station_n . '&result=' . $total_result . '&WI=' . $wi_no . '&WV=' . $wi_no_v . '&DC==' . $DC_check . '&SN=' . $station_name . '&AS=' . $data['assy_no'] . '&TY=MN>' . $code . ' //  PD :: ' . $data['production_order_no'] . ' //  LOT :: ' . $data['lot_no'] . ' //  REV :: ' . $code_rev . ' //  ASSY NUMBER :: ' . $data['assy_no'] .' //  Station :: ' . $st_name. ' //  RESULT :: ' . $data['total_result'] . '</a>';
+
+                                            echo '<li class = "NG" ><a href=' . SITEURL . 'Sub_process.php?database=' . $process_name . '&PD=' . $data['production_order_no'] . '&lot=' . $data['lot_no'] . '&main=' . $process_name . '&search=' . $search . '&Station=' . $station_n . '&result=' . $total_result . '&WI=' . $wi_no . '&WV=' . $wi_no_v . '&DC==' . $DC_check . '&SN=' . $station_name . '&AS=' . $data['assy_no'] . '&TY=MN>' . $code . ' //  PD :: ' . $data['production_order_no'] . ' //  LOT :: ' . $data['lot_no'] . ' //  REV :: ' . $code_rev . ' //  ASSY NUMBER :: ' . $data['assy_no'] . ' //  Station :: ' . $st_name . ' //  RESULT :: ' . $data['total_result'] . '</a>';
                                             echo '<ul>';
 
 
@@ -222,7 +221,6 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
                                                                     if ($count_p == 1) {
                                                                         $row_t = mysqli_fetch_assoc($result_cal);
                                                                         $st_name = $row_t['station_name'];
-
                                                                     }
                                                                     for ($x = 1; $x <= 15; $x++) {
 
@@ -234,7 +232,7 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
                                                                         if (((!empty($code_Loop2)) and (!empty($lot_Loop2)) and (!empty($PD_inv_Loop2)))) {
 
                                                                             if ($code_Loop2[0] == "W") {
-                                                                                echo '<li><a href="#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 .' //  Station :: ' . $st_name.  ' // RESULT :: ' . $total_result . ' </a>';
+                                                                                echo '<li><a href="#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' //  Station :: ' . $st_name .  ' // RESULT :: ' . $total_result . ' </a>';
                                                                             } else {
                                                                                 echo '<li><a href="#">' . $code_Loop2 . ' // INV :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' </a>';
                                                                             }
@@ -282,7 +280,6 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
                                                                                             if ($count_p == 1) {
                                                                                                 $row_t = mysqli_fetch_assoc($result_cal);
                                                                                                 $st_name = $row_t['station_name'];
-
                                                                                             }
                                                                                             for ($x = 1; $x <= 15; $x++) {
 
@@ -293,7 +290,7 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
 
 
                                                                                                     if ($code_Loop2[0] == "W") {
-                                                                                                        echo '<li><a href="#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' //  LOT :: ' . $lot_Loop2 .' //  Station :: ' . $st_name.  ' //  RESULT :: ' . $total_result . '</a>';
+                                                                                                        echo '<li><a href="#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' //  LOT :: ' . $lot_Loop2 . ' //  Station :: ' . $st_name .  ' //  RESULT :: ' . $total_result . '</a>';
                                                                                                     } else {
                                                                                                         echo '<li><a href="#">' . $code_Loop2 . ' // INV :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' </a>';
                                                                                                     }
@@ -335,7 +332,6 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
                                                                                                                     if ($count_p == 1) {
                                                                                                                         $row_t = mysqli_fetch_assoc($result_cal);
                                                                                                                         $st_name = $row_t['station_name'];
-
                                                                                                                     }
 
 
@@ -349,7 +345,7 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
 
 
                                                                                                                             if ($code_Loop2[0] == "W") {
-                                                                                                                                echo '<li><a href"#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' //  LOT :: ' . $lot_Loop2 .' //  Station :: ' . $st_name. ' //  RESULT :: ' . $total_result . '</a>';
+                                                                                                                                echo '<li><a href"#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' //  LOT :: ' . $lot_Loop2 . ' //  Station :: ' . $st_name . ' //  RESULT :: ' . $total_result . '</a>';
                                                                                                                             } else {
                                                                                                                                 echo '<li><a href="#">' . $code_Loop2 . ' // INV :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' </a>';
                                                                                                                             }
@@ -561,7 +557,7 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
         var ga = document.createElement('script');
         ga.type = 'text/javascript';
         ga.async = true;
-      //  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        //  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(ga, s);
     })();
