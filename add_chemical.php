@@ -55,8 +55,8 @@ if (isset($_SESSION['OperatorName'])) {
 
 
         <?php
-
-        $db_select = mysqli_select_db($conn,$database);
+        $stack = array();
+        $db_select = mysqli_select_db($conn, $database);
         $sql_cl = "SHOW COLUMNS FROM  `$database`.`chemical`";
         $result_cl = mysqli_query($conn, $sql_cl);
         $sql_ss = "";
@@ -87,7 +87,7 @@ if (isset($_SESSION['OperatorName'])) {
 
 
 
-/*
+        /*
         $db_select = mysqli_select_db($conn, $get_database);
         $sql = "SELECT * FROM $process WHERE id = $id";
         $res = mysqli_query($conn, $sql);
@@ -111,7 +111,7 @@ if (isset($_SESSION['OperatorName'])) {
         <form action="" method="POST">
             <div class="offset-xl-1 col-xl-10">
                 <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
 
                         <div>
 
@@ -124,7 +124,7 @@ if (isset($_SESSION['OperatorName'])) {
                                                 <tr>
                                                     <td colspan="2">
                                                         <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                                        <input type="submit" name="submit" value="Add chemical" class="btn btn-warning" onclick="return confirm('คุณต้องการแก้ไขข้อมูลจริงๆใชมั้ย ?')" />
+                                                        <!--  <input type="submit" name="submit" value="Add chemical" class="btn btn-warning" onclick="return confirm('คุณต้องการแก้ไขข้อมูลจริงๆใชมั้ย ?')" />-->
                                                     </td>
                                                 </tr>
 
@@ -132,42 +132,67 @@ if (isset($_SESSION['OperatorName'])) {
 
                                                 $date_now = date("Y-m-d");
                                                 $time_now = date("h:i:s");
-
+                                                $register_date = date("d-M-Y");
 
 
                                                 for ($x = 0; $x <= sizeof($stack) - 1; $x++) {
 
-                                                   // $tagname = $row[$stack[$x]];
+                                                    // $tagname = $row[$stack[$x]];
                                                     echo "<tr>";
                                                     echo '<td>';
                                                     echo  $stack[$x];
                                                     echo '</td>';
                                                     echo '<td>';
-                                                    if( $stack[$x] == 'id')
-                                                    {
-                                                        echo '<input type="text" name="' . $stack[$x] . '" value="N/A">';
+                                                    if ($stack[$x] == 'id') {
+                                                        echo '<input class="form-control" type="text" id = "' . $stack[$x] . '"name="' . $stack[$x] . '" value="N/A">';
+                                                    } elseif ($stack[$x] == 'create_date') {
+                                                        echo '<input class="form-control" type="text" id = "' . $stack[$x] . '" name="' . $stack[$x] . '" value="' . $date_now . '">';
+                                                    } elseif ($stack[$x] == 'register_date') {
+                                                        echo '<input class="form-control" type="text" id = "' . $stack[$x] . '" name="' . $stack[$x] . '" value="' . $register_date . '">';
+                                                    } elseif ($stack[$x] == 'create_time') {
+                                                        echo '<input class="form-control" type="text" id = "' . $stack[$x] . '" name="' . $stack[$x] . '" value="' . $time_now . '">';
+                                                    } elseif ($stack[$x] == 'create_operator_name') {
+                                                        echo '<input class="form-control" type="text" id = "' . $stack[$x] . '" name="' . $stack[$x] . '" value="' . $OperatorName . '">';
+                                                    } elseif ($stack[$x] == 'create_operator_id') {
+                                                        echo '<input class="form-control" type="text" id = "' . $stack[$x] . '" name="' . $stack[$x] . '" value="' . $OperatorID . '">';
+                                                    } elseif ($stack[$x] == 'name') {
+                                                        echo '<select name="chemical" class="custom-select" id="' . $stack[$x] . '">';
+
+                                                        $get_chemical = new DB_con();
+                                                        $sql = $get_chemical->get_chemical_list();
+                                                        while ($data = mysqli_fetch_array($sql)) {
+
+                                                ?>
+
+
+                                                            <option class="chemical_name" value=<?php echo $data['name']; ?>><?php echo $data['name']; ?></option>
+
+
+
+                                                        <?php
+                                                        }
+                                                        echo '</select>';
+                                                    } elseif ($stack[$x] == 'code') {
+
+                                                        $get_chemical = new DB_con();
+                                                        $sql = $get_chemical->get_chemical_list();
+                                                        echo '<select name="chemical" class="custom-select" id="' . $stack[$x] . '">';
+                                                        while ($data = mysqli_fetch_array($sql)) {
+
+                                                        ?>
+
+
+                                                            <option class="chemical_code" value=<?php echo $data['code']; ?>><?php echo $data['code']; ?></option>
+
+
+
+                                                <?php
+                                                        }
+                                                        echo '</select>';
+                                                    } else {
+                                                        echo '<input class="form-control" type="text" id = "' . $stack[$x] . '"  name="' . $stack[$x] . '" value="">';
                                                     }
-                                                    elseif($stack[$x] == 'create_date')
-                                                    {
-                                                        echo '<input type="text" name="' . $stack[$x] . '" value="'.$date_now.'">';
-                                                    }
-                                                    elseif($stack[$x] == 'create_time')
-                                                    {
-                                                        echo '<input type="text" name="' . $stack[$x] . '" value="'.$time_now.'">';
-                                                    }
-                                                    elseif($stack[$x] == 'create_operator_name')
-                                                    {
-                                                        echo '<input type="text" name="' . $stack[$x] . '" value="'.$OperatorName.'">';
-                                                    }
-                                                    elseif($stack[$x] == 'create_operator_id')
-                                                    {
-                                                        echo '<input type="text" name="' . $stack[$x] . '" value="'.$OperatorID.'">';
-                                                    }
-                                                    else
-                                                    {
-                                                        echo '<input type="text" name="' . $stack[$x] . '" value="">';
-                                                    }
-                                                    
+
                                                     echo '</td>';
                                                     echo "</tr>";
                                                 }
@@ -179,6 +204,7 @@ if (isset($_SESSION['OperatorName'])) {
                                                     <td colspan="2">
                                                         <input type="hidden" name="id" value="<?php echo $id; ?>">
                                                         <input type="submit" name="submit" value="Add chemical" class="btn btn-warning" onclick="return confirm('คุณต้องการแก้ไขข้อมูลจริงๆใชมั้ย ?')" />
+                                                        <button type="button" name="save" id="save" class="btn btn-info">Save</button>
                                                     </td>
                                                 </tr>
 
@@ -190,42 +216,10 @@ if (isset($_SESSION['OperatorName'])) {
 
 
                         </div>
+
                     </div>
 
-                    <div class="col-xl- col-lg-6 col-md-12 col-sm-12 col-12">
-                        <div class="card">
-                            <div class="card-header bg-warning text-center p-3">
-                                <h4 class="mb-0 text-white">Add chemical detail</h4>
-                            </div>
 
-                            <div class="card-body border-top">
-                                <div class="table-responsive">
-                                    <Table class="table table-striped table-bordered first">
-                                        <?php
-                                        $topic = array('details', 'ECN_No', 'Labview_request_No');
-                                        for ($x = 0; $x < 3; $x++) {
-
-
-                                            echo "<tr>";
-                                            echo '<td>';
-                                            echo  $topic[$x];
-                                            echo '</td>';
-                                            echo '<td>';
-                                            if ($x == 0) {
-                                                echo '<textarea  name="' . $topic[$x] . '" value="' . $topic[$x] . 'cols="30" rows = "5"></textarea>';
-                                            } else {
-                                                echo '<input type="text" name="' . $topic[$x] . '" value="">';
-                                            }
-                                            // 
-                                            echo '</td>';
-                                            echo "</tr>";
-                                        }
-                                        ?>
-                                    </Table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 
@@ -262,41 +256,33 @@ if (isset($_POST['submit'])) {
     if (!empty($detail)) {
 
         $sql_insert = "INSERT INTO `$database`.`chemical`";
-        $column ="";
-        $value ="";
+        $column = "";
+        $value = "";
         for ($x = 0; $x <= sizeof($stack) - 1; $x++) {
 
             $fl = $stack[$x];
             $ne = $_POST[$stack[$x]];
-            if ($fl !== "id") 
-            {
-                $column = $column."`$fl`,";
-                $value = $value ."'$ne',";
-
-
-
-
-            } 
-            else 
-            {
-               ;
+            if ($fl !== "id") {
+                $column = $column . "`$fl`,";
+                $value = $value . "'$ne',";
+            } else {;
             }
         }
 
-        $column = substr( $column, 0, strlen( $column) - 1);
-        $value = substr( $value, 0, strlen( $value) - 1);
-        $sql_insert = $sql_insert.'('.$column.')'.'VALUES'.'('.$value.');';
-        
-      
+        $column = substr($column, 0, strlen($column) - 1);
+        $value = substr($value, 0, strlen($value) - 1);
+        $sql_insert = $sql_insert . '(' . $column . ')' . 'VALUES' . '(' . $value . ');';
 
-       // $sql_update = $sql_update . " WHERE id = '$id_rec'";
+
+
+        // $sql_update = $sql_update . " WHERE id = '$id_rec'";
 
         $res = mysqli_query($conn, $sql_insert);
 
         if ($res == true) {
             //echo "admin Deleteed";http://128.100.117.95/medical/process_data.php?db=npt-baxter-lvp&process=Labview_chat
             $_SESSION['update'] = "<div class = 'success'>Add chemical Successfully.</div>";
-            audit_t($OperatorName, $OperatorID, "position= $id", "Add chemical", "Add Process", "$detail add process $process", $ECN_No);
+            audit_t($OperatorName, $OperatorID, "position= $id", "Add chemical", "Add Process", "$detail add process $process", $ECN_No, "npt");
             echo '<script type="text/javascript">';
             echo ' alert("add chemical complete")';  //not showing an alert box.
             echo '</script>';
@@ -337,6 +323,31 @@ if (isset($_POST['submit'])) {
 <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+
+
+<script>
+    let code_value = document.querySelector(".custom-select");
+    let code_name = document.getElementById("name");
+    let save_bt = document.getElementById("save");
+    code_value.addEventListener('change', getcode);
+    save_bt.addEventListener('click', insert_dat)
+
+    function getcode() {
+
+        var x = document.getElementById("code").selectedIndex;
+        document.getElementById("name").selectedIndex = x;
+        //  alert(x);
+
+    }
+
+
+    function insert_dat() {
+
+        let get_data = document.querySelectorAll(".form-control")
+        get_data.forEach
+    }
+</script>
+
 </body>
 
 </html>

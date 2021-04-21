@@ -296,7 +296,7 @@ if (isset($_POST['submit'])) {
         if ($res == true) {
             //echo "admin Deleteed";http://128.100.117.95/medical/process_data.php?db=npt-baxter-lvp&process=Labview_chat
             $_SESSION['update'] = "<div class = 'success'>Add chemical_list Successfully.</div>";
-            audit_t($OperatorName, $OperatorID, "position= $id", "Add chemical_list", "Add Process", "$detail add process $process", $ECN_No);
+            audit_t($OperatorName, $OperatorID, "position= $id", "Add chemical_list", "Add Process", "$detail add process $process", $ECN_No,"npt");
             echo '<script type="text/javascript">';
             echo ' alert("add chemical_list complete")';  //not showing an alert box.
             echo '</script>';

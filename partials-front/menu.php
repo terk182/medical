@@ -37,6 +37,28 @@ $dir_path = "code/";
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/charts/morris-bundle/morris.css">
     <link rel="stylesheet" type="text/css" href="assets/vendor/daterangepicker/daterangepicker.css" />
+   
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- BS Stepper -->
+  <link rel="stylesheet" href="plugins/bs-stepper/css/bs-stepper.min.css">
+  <!-- dropzonejs -->
+  <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
+  <!-- Theme style -->
+  
 
 
 </head>
@@ -272,14 +294,15 @@ $dir_path = "code/";
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Repair</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Qc report</a>
-                                        </li>
+                                       
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Deviation</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Line clearance</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="add_chemical.php?db=npt-baxter-lvp">Add chemical</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Add emplayee</a>
@@ -322,7 +345,7 @@ $dir_path = "code/";
 
                                 $process_str1 = "/npt/i";
 
-                                if ($row['Database'] !== "npt-lvp") {
+                                if (($row['Database'] !== "npt-lvp") AND ($row['Database'] !== "npt-baxter-rowl-lvp")AND ($row['Database'] !== "npt-baxter-rowl-syr")AND ($row['Database'] !== "npt-baxter-pca")) {
 
                                     if (preg_match($process_str1, $row['Database'])) {
 

@@ -218,4 +218,14 @@ class DB_con
           return $Standard;
       }
 
+      public function get_chemical_list()
+      {
+          $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
+          $this->dbcon = $conn;
+          $db_select = mysqli_select_db($conn, "npt");
+          $Standard = mysqli_query($this->dbcon, "SELECT * FROM `npt`.`chemical_list`");
+  
+          return $Standard;
+      }
+
 }

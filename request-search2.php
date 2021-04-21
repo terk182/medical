@@ -164,7 +164,7 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
                                                 $class_tag = 'class = "NG"';
                                             }
 
-                                            echo '<li class = "NG" ><a href=' . SITEURL . 'Sub_process.php?database=' . $process_name . '&PD=' . $data['production_order_no'] . '&lot=' . $data['lot_no'] . '&main=' . $process_name . '&search=' . $search . '&Station=' . $station_n . '&result=' . $total_result . '&WI=' . $wi_no . '&WV=' . $wi_no_v . '&DC==' . $DC_check . '&SN=' . $station_name . '&AS=' . $data['assy_no'] . '&TY=MN>' . $code . ' //  PD :: ' . $data['production_order_no'] . ' //  LOT :: ' . $data['lot_no'] . ' //  REV :: ' . $code_rev . ' //  ASSY NUMBER :: ' . $data['assy_no'] . ' //  Station :: ' . $st_name . ' //  RESULT :: ' . $data['total_result'] . '</a>';
+                                            echo '<li ><a href=' . SITEURL . 'Sub_process.php?database=' . $process_name . '&PD=' . $data['production_order_no'] . '&lot=' . $data['lot_no'] . '&main=' . $process_name . '&search=' . $search . '&Station=' . $st_name . '&result=' . $total_result . '&WI=' . $wi_no . '&WV=' . $wi_no_v . '&DC==' . $DC_check . '&SN=' . $station_name . '&AS=' . $data['assy_no'] . '&TY=MN>' . $code . ' //  PD :: ' . $data['production_order_no'] . ' //  LOT :: ' . $data['lot_no'] . ' //  REV :: ' . $code_rev . ' //  ASSY NUMBER :: ' . $data['assy_no'] . ' //  Station :: ' . $st_name . ' //  RESULT :: ' . $data['total_result'] . '</a>';
                                             echo '<ul>';
 
 
@@ -176,7 +176,7 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
 
                                                 if ((!empty($code_Loop1)) and (!empty($lot_Loop1)) and (!empty($PD_inv_Loop1))) {
                                                     if ($code_Loop1[0] == "W") {
-                                                        echo '<li><a href="#">' . $code_Loop1 . ' PD :: ' . $PD_inv_Loop1 . '  LOT :: ' . $lot_Loop1 . '  RESULT :: ' . $total_result . ' </a>';
+                                                        echo '<li><a href="#">' . $code_Loop1 . ' PD :: ' . $PD_inv_Loop1 . '  LOT :: ' . $lot_Loop1 . '  RESULT *********************************************************1 :: ' . $total_result . ' </a>';
                                                     } else {
                                                         echo '<li><a href="' . SITEURL . 'Sub_part.php?part=' . $code_Loop1 . '&inv=' . $PD_inv_Loop1 . '&lot=' . $lot_Loop1 . '&rev=' . '&search=' . $search . '&MN=' . $process_name . ' ">' . $code_Loop1 . ' INV :: ' . $PD_inv_Loop1 . ' LOT :: ' . $lot_Loop1 . '  </a>';
                                                     }
@@ -232,9 +232,9 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
                                                                         if (((!empty($code_Loop2)) and (!empty($lot_Loop2)) and (!empty($PD_inv_Loop2)))) {
 
                                                                             if ($code_Loop2[0] == "W") {
-                                                                                echo '<li><a href="#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' //  Station :: ' . $st_name .  ' // RESULT :: ' . $total_result . ' </a>';
+                                                                                echo '<li><a href="#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' //  Station :: ' . $st_name .  ' // RESULT ::  *********************************************************2 ' . $total_result . ' </a>';
                                                                             } else {
-                                                                                echo '<li><a href="#">' . $code_Loop2 . ' // INV :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' </a>';
+                                                                                echo '<li><a href="' . SITEURL . 'Sub_part.php?part=' . $code_Loop2 . '&inv=' . $PD_inv_Loop2 . '&lot=' . $lot_Loop2 . '&rev=' . '&search=' . $search . '&MN=' . $sub_name . ' ">' . $code_Loop2 . ' // INV :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' </a>';
                                                                             }
 
 
@@ -290,9 +290,9 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
 
 
                                                                                                     if ($code_Loop2[0] == "W") {
-                                                                                                        echo '<li><a href="#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' //  LOT :: ' . $lot_Loop2 . ' //  Station :: ' . $st_name .  ' //  RESULT :: ' . $total_result . '</a>';
+                                                                                                        echo '<li><a href="#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' //  LOT :: ' . $lot_Loop2 . ' //  Station :: ' . $st_name .  ' //  RESULT :: *********************************************************3  ' . $total_result . '</a>';
                                                                                                     } else {
-                                                                                                        echo '<li><a href="#">' . $code_Loop2 . ' // INV :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' </a>';
+                                                                                                        echo '<li><a href="' . SITEURL . 'Sub_part.php?part=' . $code_Loop2 . '&inv=' . $PD_inv_Loop2 . '&lot=' . $lot_Loop2 . '&rev=' . '&search=' . $search . '&MN=' . $sub_name . ' ">' . $code_Loop2 . ' // INV :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' </a>';
                                                                                                     }
 
 
@@ -334,7 +334,7 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
                                                                                                                         $st_name = $row_t['station_name'];
                                                                                                                     }
 
-
+                                                                                                                    $st_id = $data['station_daily_check_id'];
 
                                                                                                                     for ($x = 1; $x <= 15; $x++) {
 
@@ -345,9 +345,9 @@ error_reporting(0); //  ปิดการแจ้งเตือน error
 
 
                                                                                                                             if ($code_Loop2[0] == "W") {
-                                                                                                                                echo '<li><a href"#">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' //  LOT :: ' . $lot_Loop2 . ' //  Station :: ' . $st_name . ' //  RESULT :: ' . $total_result . '</a>';
+                                                                                                                                echo '<li><a href"'.SITEURL.'Sub_process.php?database='.$sub_table.'&PD='.$b_inv.'&lot='.$b_lot.'&main='.$sub_name .'&search='.$search.'&Station='.$st_name.'&result='.$total_result.'&WI='.$sub_WI.'&WV='.$sub_WV.'&DC='.$st_id.'&SN='.$station_name.'&AS='.'&TY=SUB'.'&'.'">' . $code_Loop2 . ' // PD :: ' . $PD_inv_Loop2 . ' //  LOT :: ' . $lot_Loop2 . ' //  Station :: ' . $st_name . ' //  RESULT :: *********************************************************4  ' . $total_result . '</a>';
                                                                                                                             } else {
-                                                                                                                                echo '<li><a href="#">' . $code_Loop2 . ' // INV :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' </a>';
+                                                                                                                                echo '<li><a href="' . SITEURL . 'Sub_part.php?part=' . $code_Loop2 . '&inv=' . $PD_inv_Loop2 . '&lot=' . $lot_Loop2 . '&rev=' . '&search=' . $search . '&MN=' . $sub_name . ' ">' . $code_Loop2 . ' // INV :: ' . $PD_inv_Loop2 . ' // LOT :: ' . $lot_Loop2 . ' </a>';
                                                                                                                             }
                                                                                                                         } else {
                                                                                                                             break;
